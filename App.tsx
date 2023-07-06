@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { FlatList, Text, TextInput, View } from 'react-native'
 
 function App(): JSX.Element {
   const [text, setText] = useState('')
-  const [entries, setEntries] = useState([])
+  const [entries, setEntries] = useState<string[]>(['A', 'B', 'C'])
 
   return (
     <View>
@@ -13,7 +13,11 @@ function App(): JSX.Element {
         onChangeText={() => {
           console.log('Changing text')
         }}
-        value={text}></TextInput>
+        value={text}
+        placeholder="Enter your wisdom"></TextInput>
+      <FlatList
+        data={entries}
+        renderItem={({ item }) => <Text>{item}</Text>}></FlatList>
     </View>
   )
 }
