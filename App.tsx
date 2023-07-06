@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FlatList, Text, TextInput, View } from 'react-native'
+import { Button, FlatList, Text, TextInput, View } from 'react-native'
 
 function App(): JSX.Element {
   const [text, setText] = useState('')
@@ -7,14 +7,21 @@ function App(): JSX.Element {
 
   return (
     <View>
-      <Text>Hello world!</Text>
       <TextInput
         style={{ borderWidth: 1, borderColor: 'white' }}
-        onChangeText={() => {
-          console.log('Changing text')
+        onChangeText={newText => {
+          setText(newText)
         }}
         value={text}
         placeholder="Enter your wisdom"></TextInput>
+      <Button
+        title="Test"
+        onPress={() => {
+          const currEntries = [...entries]
+          currEntries.push(text)
+          setEntries(currEntries)
+          setText('')
+        }}></Button>
       <FlatList
         data={entries}
         renderItem={({ item }) => <Text>{item}</Text>}></FlatList>
